@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMINA — Centro de Belleza & Bienestar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rose:       #C4796A;
+      --rose-light: #E8A99D;
+      --rose-pale:  #F7EDE9;
+      --cream:      #FBF7F4;
+      --dark:       #2A1F1A;
+      --text:       #5C4A42;
+      --gold:       #C9A96E;
+      --white:      #FFFCFA;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--rose-light); }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 56px;
+      height: 70px;
+      background: rgba(251,247,244,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(196,121,106,0.15);
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--rose);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .logo span { font-style: italic; color: var(--gold); }
+    nav ul {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    nav ul li a {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+      padding-bottom: 3px;
+    }
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--rose);
+      transition: width 0.3s;
+    }
+    nav ul li a:hover { color: var(--rose); }
+    nav ul li a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--rose);
+      color: var(--white) !important;
+      padding: 10px 24px !important;
+      border-radius: 2px;
+      transition: background 0.3s !important;
+    }
+    .nav-cta:hover { background: var(--dark) !important; color: var(--white) !important; }
+    .nav-cta::after { display: none !important; }
+
+    /* ── HERO ── */
+    .hero {
+      margin-top: 70px;
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0 56px;
+      gap: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      right: -120px; top: -120px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(196,121,106,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--rose);
+      border: 1px solid rgba(196,121,106,0.4);
+      padding: 6px 16px;
+      margin-bottom: 28px;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 24px;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+    .hero h1 em { font-style: italic; color: var(--rose); }
+    .hero p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text);
+      max-width: 420px;
+      margin-bottom: 40px;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--rose);
+      color: var(--white);
+      padding: 16px 36px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--dark); transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--dark);
+      padding: 16px 36px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(42,31,26,0.25);
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--rose); color: var(--rose); }
+
+    /* Hero imagen */
+    .hero-visual {
+      position: relative;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+    .hero-img-frame {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, var(--rose-pale) 0%, var(--rose-light) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-img-frame::after {
+      content: '✦';
+      position: absolute;
+      font-size: 8rem;
+      color: rgba(255,255,255,0.3);
+      bottom: -20px; right: -20px;
+    }
+    .hero-img-overlay {
+      position: absolute;
+      bottom: 28px; left: -28px;
+      background: var(--white);
+      padding: 20px 28px;
+      box-shadow: 0 8px 40px rgba(42,31,26,0.12);
+      min-width: 200px;
+    }
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--rose);
+      line-height: 1;
+    }
+    .hero-stat-txt {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-top: 4px;
+    }
+    /* Flor decorativa hero */
+    .hero-deco {
+      position: absolute;
+      top: 28px; right: -16px;
+      background: var(--rose-pale);
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SERVICIOS ── */
+    .servicios {
+      padding: 100px 56px;
+      background: var(--white);
+    }
+    .section-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400;
+      color: var(--dark);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .section-title em { font-style: italic; color: var(--rose); }
+    .section-desc {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 56px;
+    }
+    .servicios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2px;
+    }
+    .servicio-card {
+      background: var(--cream);
+      padding: 40px 32px;
+      transition: background 0.3s, transform 0.3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .servicio-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 3px;
+      background: var(--rose);
+      transition: width 0.4s ease;
+    }
+    .servicio-card:hover { background: var(--rose-pale); transform: translateY(-4px); }
+    .servicio-card:hover::before { width: 100%; }
+    .servicio-icon {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .servicio-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .servicio-desc {
+      font-size: 0.8rem;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .servicio-precio {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--rose);
+    }
+    .servicio-desde {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-right: 6px;
+    }
+
+    /* ── POR QUÉ LUMINA ── */
+    .porque {
+      padding: 100px 56px;
+      background: var(--dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .porque-text .section-label { color: var(--rose-light); }
+    .porque-text .section-title { color: var(--white); }
+    .porque-text .section-desc { color: rgba(255,255,255,0.6); margin-bottom: 40px; }
+    .porque-items {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .porque-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .porque-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--rose);
+      opacity: 0.5;
+      line-height: 1;
+      flex-shrink: 0;
+      width: 40px;
+    }
+    .porque-item-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .porque-item-desc {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+    }
+    .porque-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .porque-box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(196,121,106,0.2);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .porque-box:first-child { grid-column: span 2; }
+    .porque-box-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--rose-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .porque-box-txt {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── PRECIOS ── */
+    .precios {
+      padding: 100px 56px;
+      background: var(--cream);
+    }
+    .precios-header { margin-bottom: 56px; }
+    .precios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .precio-card {
+      background: var(--white);
+      border: 1px solid rgba(196,121,106,0.15);
+      padding: 40px 32px;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .precio-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(196,121,106,0.15);
+    }
+    .precio-card.featured {
+      background: var(--rose);
+      border-color: var(--rose);
+    }
+    .precio-badge {
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--white);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+    }
+    .precio-plan {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 12px;
+    }
+    .precio-card.featured .precio-plan { color: rgba(255,255,255,0.7); }
+    .precio-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--dark);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .precio-card.featured .precio-num { color: var(--white); }
+    .precio-periodo {
+      font-size: 0.7rem;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+    .precio-card.featured .precio-periodo { color: rgba(255,255,255,0.7); }
+    .precio-lista {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+    .precio-lista li {
+      font-size: 0.82rem;
+      color: var(--text);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(196,121,106,0.1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .precio-card.featured .precio-lista li { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.15); }
+    .precio-lista li::before { content: '✦'; font-size: 0.5rem; color: var(--rose); flex-shrink: 0; }
+    .precio-card.featured .precio-lista li::before { color: rgba(255,255,255,0.6); }
+    .btn-precio {
+      width: 100%;
+      padding: 14px;
+      background: transparent;
+      border: 1px solid rgba(196,121,106,0.4);
+      color: var(--rose);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+    }
+    .btn-precio:hover { background: var(--rose); color: var(--white); border-color: var(--rose); }
+    .precio-card.featured .btn-precio {
+      background: var(--white);
+      color: var(--rose);
+      border-color: var(--white);
+    }
+    .precio-card.featured .btn-precio:hover { background: var(--dark); color: var(--white); border-color: var(--dark); }
+
+    /* ── TESTIMONIOS ── */
+    .testimonios {
+      padding: 100px 56px;
+      background: var(--rose-pale);
+    }
+    .testimonios-header { margin-bottom: 56px; }
+    .testimonios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonio {
+      background: var(--white);
+      padding: 36px 32px;
+      position: relative;
+    }
+    .testimonio::before {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      color: var(--rose-light);
+      position: absolute;
+      top: 12px; left: 24px;
+      line-height: 1;
+      opacity: 0.4;
+    }
+    .testimonio-texto {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 24px;
+      padding-top: 20px;
+    }
+    .testimonio-autor {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .testimonio-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose-light), var(--rose));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .testimonio-nombre {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--dark);
+    }
+    .testimonio-servicio {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-top: 2px;
+    }
+    .estrellas { color: var(--gold); font-size: 0.75rem; margin-bottom: 12px; }
+
+    /* ── CONTACTO ── */
+    .contacto {
+      padding: 100px 56px;
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contacto-info .section-title { margin-bottom: 24px; }
+    .contacto-dato {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+    .contacto-icono {
+      width: 44px; height: 44px;
+      background: var(--rose-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .contacto-dato-title {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 4px;
+    }
+    .contacto-dato-val {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .contacto-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .form-input, .form-select, .form-textarea {
+      padding: 14px 16px;
+      border: 1px solid rgba(196,121,106,0.25);
+      background: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      color: var(--dark);
+      outline: none;
+      transition: border-color 0.3s;
+      width: 100%;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--rose);
+    }
+    .form-textarea { resize: vertical; min-height: 110px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* ── WHATSAPP ── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      width: 54px; height: 54px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      color: white;
+      text-decoration: none;
+      z-index: 999;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.2s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      padding: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--rose-light);
+      letter-spacing: 0.12em;
+    }
+    .footer-logo span { font-style: italic; color: var(--gold); }
+    footer p {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+    }
+    footer a { color: var(--rose-light); text-decoration: none; }
+
+    /* ── HAMBURGUESA MÓVIL ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--rose); transition: all 0.3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      header { padding: 0 24px; }
+      .hamburger { display: flex; }
+      nav {
+        position: fixed;
+        top: 70px; left: 0; right: 0;
+        background: rgba(251,247,244,0.97);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s;
+        border-bottom: 1px solid rgba(196,121,106,0.15);
+      }
+      nav.open { max-height: 400px; }
+      nav ul { flex-direction: column; gap: 0; padding: 8px 0 16px; }
+      nav ul li a { display: block; padding: 14px 24px; }
+      .hero { grid-template-columns: 1fr; padding: 40px 24px; min-height: auto; }
+      .hero-visual { display: none; }
+      .servicios, .porque, .precios, .testimonios, .contacto { padding: 64px 24px; }
+      .porque { grid-template-columns: 1fr; gap: 48px; }
+      .porque-visual { display: none; }
+      .precios-grid { grid-template-columns: 1fr; }
+      .testimonios-grid { grid-template-columns: 1fr; }
+      .contacto { grid-template-columns: 1fr; gap: 48px; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 40px 24px; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">LUMIN<span>A</span></div>
+  <button class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </button>
+  <nav id="nav">
+    <ul>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#precios">Precios</a></li>
+      <li><a href="#testimonios">Reseñas</a></li>
+      <li><a href="https://wa.me/573000000000" class="nav-cta" target="_blank">Agendar Cita</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-tag">✦ Centro de Belleza & Bienestar</div>
+    <h1>Tu belleza,<br>nuestra <em>pasión</em></h1>
+    <p>En LUMINA transformamos tu imagen con tratamientos de alta calidad. Porque cada mujer merece sentirse extraordinaria.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/573000000000" class="btn-primary" target="_blank">Agendar Cita</a>
+      <a href="#servicios" class="btn-secondary">Ver Servicios</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-deco">🌸</div>
+    <div class="hero-img-frame"></div>
+    <div class="hero-img-overlay">
+      <div class="hero-stat-num">500+</div>
+      <div class="hero-stat-txt">Clientas felices</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SERVICIOS -->
+<section class="servicios" id="servicios">
+  <div class="section-label">✦ Lo que ofrecemos</div>
+  <h2 class="section-title">Nuestros <em>Servicios</em></h2>
+  <p class="section-desc">Cada tratamiento está diseñado para realzar tu belleza natural con productos de primera calidad.</p>
+  <div class="servicios-grid">
+
+    <div class="servicio-card">
+      <span class="servicio-icon">✨</span>
+      <div class="servicio-name">Facial Premium</div>
+      <div class="servicio-desc">Limpieza profunda, hidratación y rejuvenecimiento. Piel radiante garantizada.</div>
+      <div class="servicio-precio"><span class="servicio-desde">Desde</span>$80.000</div>
+    </div>
+
+    <div class="servicio-card">
+      <span class="servicio-icon">💅</span>
+      <div class="servicio-name">Nail Art</div>
+      <div class="servicio-desc">Manicure y pedicure con diseños exclusivos. Semipermanente y acrílicas.</div>
+      <div class="servicio-precio"><span class="servicio-desde">Desde</span>$45.000</div>
+    </div>
+
+    <div class="servicio-card">
+      <span class="servicio-icon">💇‍♀️</span>
+      <div class="servicio-name">Cabello</div>
+      <div class="servicio-desc">Corte, color, mechas y tratamientos capilares con las mejores marcas del mercado.</div>
+      <div class="servicio-precio"><span class="servicio-desde">Desde</span>$60.000</div>
+    </div>
+
+    <div class="servicio-card">
+      <span class="servicio-icon">💄</span>
+      <div class="servicio-name">Maquillaje</div>
+      <div class="servicio-desc">Social, artístico y de novia. Técnicas profesionales para cada ocasión especial.</div>
+      <div class="servicio-precio"><span class="servicio-desde">Desde</span>$120.000</div>
+    </div>
+
+    <div class="servicio-card">
+      <span class="servicio-icon">🧖‍♀️</span>
+      <div class="servicio-name">Spa Corporal</div>
+      <div class="servicio-desc">Masajes relajantes, exfoliaciones e hidratación corporal. Bienestar total.</div>
+      <div class="servicio-precio"><span class="servicio-desde">Desde</span>$95.000</div>
+    </div>
+
+    <div class="servicio-card">
+      <span class="servicio-icon">🌿</span>
+      <div class="servicio-name">Depilación</div>
+      <div class="servicio-desc">Técnicas suaves y efectivas. Cera tibia, hilo y láser para resultados duraderos.</div>
+      <div class="servicio-precio"><span class="servicio-desde">Desde</span>$35.000</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- POR QUÉ LUMINA -->
+<section class="porque" id="nosotros">
+  <div class="porque-text">
+    <div class="section-label">✦ Por qué elegirnos</div>
+    <h2 class="section-title" style="color:var(--white)">La experiencia <em>LUMINA</em></h2>
+    <p class="section-desc">Somos un espacio donde la belleza y el bienestar se encuentran. Un lugar para ti.</p>
+    <div class="porque-items">
+      <div class="porque-item">
+        <div class="porque-num">01</div>
+        <div>
+          <div class="porque-item-title">Profesionales certificadas</div>
+          <div class="porque-item-desc">Nuestro equipo se capacita constantemente para ofrecerte las últimas técnicas del mundo de la belleza.</div>
+        </div>
+      </div>
+      <div class="porque-item">
+        <div class="porque-num">02</div>
+        <div>
+          <div class="porque-item-title">Productos de alta calidad</div>
+          <div class="porque-item-desc">Solo trabajamos con marcas reconocidas y productos que cuidan tu piel y cabello.</div>
+        </div>
+      </div>
+      <div class="porque-item">
+        <div class="porque-num">03</div>
+        <div>
+          <div class="porque-item-title">Ambiente exclusivo</div>
+          <div class="porque-item-desc">Un espacio pensado para que te relajes y disfrutes cada momento de tu visita.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="porque-visual">
+    <div class="porque-box">
+      <div class="porque-box-num">500+</div>
+      <div class="porque-box-txt">Clientas satisfechas</div>
+    </div>
+    <div class="porque-box">
+      <div class="porque-box-num">5★</div>
+      <div class="porque-box-txt">Calificación promedio</div>
+    </div>
+    <div class="porque-box">
+      <div class="porque-box-num">3+</div>
+      <div class="porque-box-txt">Años de experiencia</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PRECIOS -->
+<section class="precios" id="precios">
+  <div class="precios-header">
+    <div class="section-label">✦ Nuestros paquetes</div>
+    <h2 class="section-title">Planes <em>para ti</em></h2>
+    <p class="section-desc">Escoge el paquete que mejor se adapte a lo que necesitas.</p>
+  </div>
+  <div class="precios-grid">
+
+    <div class="precio-card">
+      <div class="precio-plan">Esencial</div>
+      <div class="precio-num">$120.000</div>
+      <div class="precio-periodo">Por sesión</div>
+      <ul class="precio-lista">
+        <li>Facial básico</li>
+        <li>Manicure sencilla</li>
+        <li>Pedicure sencilla</li>
+        <li>Asesoría de imagen</li>
+      </ul>
+      <a href="https://wa.me/573000000000" class="btn-precio" target="_blank">Agendar Ahora</a>
+    </div>
+
+    <div class="precio-card featured">
+      <div class="precio-badge">Más popular</div>
+      <div class="precio-plan">Luminosa</div>
+      <div class="precio-num">$220.000</div>
+      <div class="precio-periodo">Por sesión</div>
+      <ul class="precio-lista">
+        <li>Facial premium</li>
+        <li>Nail art completo</li>
+        <li>Tratamiento capilar</li>
+        <li>Maquillaje social</li>
+        <li>Masaje relajante</li>
+      </ul>
+      <a href="https://wa.me/573000000000" class="btn-precio" target="_blank">Agendar Ahora</a>
+    </div>
+
+    <div class="precio-card">
+      <div class="precio-plan">Novia</div>
+      <div class="precio-num">$450.000</div>
+      <div class="precio-periodo">Paquete completo</div>
+      <ul class="precio-lista">
+        <li>Prueba de maquillaje</li>
+        <li>Maquillaje de novia</li>
+        <li>Peinado nupcial</li>
+        <li>Manicure y pedicure</li>
+        <li>Spa de manos y pies</li>
+        <li>Acompañamiento el día</li>
+      </ul>
+      <a href="https://wa.me/573000000000" class="btn-precio" target="_blank">Agendar Ahora</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- TESTIMONIOS -->
+<section class="testimonios" id="testimonios">
+  <div class="testimonios-header">
+    <div class="section-label">✦ Lo que dicen ellas</div>
+    <h2 class="section-title">Reseñas <em>reales</em></h2>
+  </div>
+  <div class="testimonios-grid">
+
+    <div class="testimonio">
+      <div class="estrellas">★★★★★</div>
+      <p class="testimonio-texto">El mejor lugar en la ciudad. Me hicieron el maquillaje de mi boda y quedé absolutamente espectacular. El equipo es muy profesional y atento.</p>
+      <div class="testimonio-autor">
+        <div class="testimonio-avatar">👰</div>
+        <div>
+          <div class="testimonio-nombre">Valentina Ruiz</div>
+          <div class="testimonio-servicio">Paquete Novia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonio">
+      <div class="estrellas">★★★★★</div>
+      <p class="testimonio-texto">Vine por el facial y quedé encantada. Mi piel nunca había lucido tan bien. Definitivamente vuelvo cada mes. Muy recomendado.</p>
+      <div class="testimonio-autor">
+        <div class="testimonio-avatar">✨</div>
+        <div>
+          <div class="testimonio-nombre">Daniela Torres</div>
+          <div class="testimonio-servicio">Facial Premium</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonio">
+      <div class="estrellas">★★★★★</div>
+      <p class="testimonio-texto">El nail art quedó precioso, exactamente lo que pedí. El ambiente es muy relajante y el servicio es de primera. ¡Las amo!</p>
+      <div class="testimonio-autor">
+        <div class="testimonio-avatar">💅</div>
+        <div>
+          <div class="testimonio-nombre">Camila Herrera</div>
+          <div class="testimonio-servicio">Nail Art</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CONTACTO -->
+<section class="contacto" id="contacto">
+  <div class="contacto-info">
+    <div class="section-label">✦ Contáctanos</div>
+    <h2 class="section-title">Agenda tu <em>cita</em></h2>
+    <p class="section-desc" style="margin-bottom:40px">Escríbenos y con gusto te atendemos. También puedes visitarnos directamente.</p>
+
+    <div class="contacto-dato">
+      <div class="contacto-icono">📍</div>
+      <div>
+        <div class="contacto-dato-title">Dirección</div>
+        <div class="contacto-dato-val">Calle 45 # 12-30, Bogotá<br>Colombia</div>
+      </div>
+    </div>
+
+    <div class="contacto-dato">
+      <div class="contacto-icono">🕐</div>
+      <div>
+        <div class="contacto-dato-title">Horarios</div>
+        <div class="contacto-dato-val">Lunes a Sábado: 8am – 7pm<br>Domingos: 9am – 3pm</div>
+      </div>
+    </div>
+
+    <div class="contacto-dato">
+      <div class="contacto-icono">📱</div>
+      <div>
+        <div class="contacto-dato-title">WhatsApp</div>
+        <div class="contacto-dato-val"><a href="https://wa.me/573000000000" style="color:var(--rose)">300 000 0000</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="contacto-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-input" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Teléfono</label>
+          <input type="tel" class="form-input" placeholder="300 000 0000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Servicio de interés</label>
+        <select class="form-select">
+          <option value="">Selecciona un servicio</option>
+          <option>Facial Premium</option>
+          <option>Nail Art</option>
+          <option>Cabello</option>
+          <option>Maquillaje</option>
+          <option>Spa Corporal</option>
+          <option>Paquete Novia</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mensaje</label>
+        <textarea class="form-textarea" placeholder="¿En qué podemos ayudarte?"></textarea>
+      </div>
+      <a href="https://wa.me/573000000000" class="btn-primary" target="_blank" style="text-align:center">Enviar por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/573000000000" class="whatsapp-float" target="_blank">💬</a>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">LUMIN<span>A</span></div>
+  <p>&copy; 2026 LUMINA — Centro de Belleza & Bienestar</p>
+  <p>Bogotá, Colombia · <a href="https://wa.me/573000000000">300 000 0000</a></p>
+</footer>
+
+<script>
+  // Menú hamburguesa
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('nav');
+  hamburger.addEventListener('click', function() {
+    nav.classList.toggle('open');
+  });
+
+  // Cerrar menú al hacer clic en un enlace
+  nav.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      nav.classList.remove('open');
+    });
+  });
+
+  // Animación al hacer scroll
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.servicio-card, .precio-card, .testimonio, .porque-item').forEach(function(el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
